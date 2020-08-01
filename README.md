@@ -1,8 +1,8 @@
 # Viraak
-
-Team Name: TheMinervis
-Team Leader Name: Sourav Kunda
-Track: ML,Smart Cities, Transportation, COVID19
+Official Submission of Team TheMinervis to Hack the Hourglass 2020<br/>
+Team Name: TheMinervis<br/>
+Team Leader: Sourav Kunda<br/>
+Track: ML,Smart Cities, Transportation, COVID19<br/>
 
 ## Problem Description
    Urgent need of integrating solutions for availing sources necessary for livelihood of every human beings.
