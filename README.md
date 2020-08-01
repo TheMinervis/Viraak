@@ -29,4 +29,23 @@ Track: ML,Smart Cities, Transportation, COVID19<br/>
    A travel section, to make important travelling procedures easy and hassle free  
    A unique crowd prediction system to find the places with least crowd in regards to latest data from GPS and GPRS systems.  
 
+### Prerequisites
+   As long as you have a pc, with an emulator installed to it, with node, npm and react-native cli installed, you are good to go!
 
+### Installing
+
+   A step by step series of examples that tell you how to get a development env running
+
+   Connect your android device for usb debugging or set up an emulator.
+
+   Go to root of the project. Run
+
+   ```
+   npm install
+   ```
+
+   ```
+   npm run android
+   ```
+
+   A metro server will start in terminal and application will be installed in your android device.
