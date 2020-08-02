@@ -80,5 +80,3 @@ buck-out/
 # Expo
 .expo/*
 web-build/
-store
-screens/donations

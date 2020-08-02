@@ -30,6 +30,24 @@ import ApplyScreen from './screens/Help/ApplyScreen';
 import CheckScreen from './screens/Help/CheckScreen';
 import VerifyScreen from './screens/Help/VerifyScreen';
 
+import MedicalScreen from './screens/Medicals/MedicalScreen';
+import MedicinesScreen from './screens/Medicals/medicines';
+import DiagnosticsScreen from './screens/Medicals/diagnostics';
+import DoctorsScreen from './screens/Medicals/doctors';
+import CheckTicketScreen from './screens/Medicals/checkTicket';
+
+import NeedsScreen from './screens/NeedsVendors/needsScreen';
+import VendorsScreen from './screens/NeedsVendors/VendorsScreen';
+
+import JoinScreen from './screens/Volunteer/JoinScreen';
+import VolunteerList from './screens/Volunteer/VolunteerList';
+import FindVolunteers from './screens/Volunteer/FindVolunteers';
+
+import BookingPage from './screens/BookingPage';
+import PossibleRoutes from './screens/possibleRoutes';
+import TrafficMap from './screens/trafficMap';
+import Location from './screens/Location';
+
 const Toast = NativeModules.Toast;
 
 const Stack = createStackNavigator();
@@ -187,6 +205,102 @@ const SettingsStack = () => (
   </Stack.Navigator>
 );
 
+const MedicalNavigator = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName="Medicals"
+      screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: 'green' },
+      }}
+    >
+      <Stack.Screen name="Medicals" component={MedicalScreen} />
+      <Stack.Screen name="Medicines" component={MedicinesScreen} />
+      <Stack.Screen name="Diagnostics" component={DiagnosticsScreen} />
+      <Stack.Screen name="Doctors" component={DoctorsScreen} />
+      <Stack.Screen name="Tickets" component={CheckTicketScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const NeedsScreenStack = () => (
+  <Stack.Navigator
+    initialRouteName="Home"
+    screenOptions={{
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: 'indigo' },
+    }}
+  >
+    <Stack.Screen name="Needs" component={NeedsScreen} />
+  </Stack.Navigator>
+);
+
+const VendorsScreenStack = () => (
+  <Stack.Navigator
+    initialRouteName="Home"
+    screenOptions={{
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: 'indigo' },
+    }}
+  >
+    <Stack.Screen name="Vendors" component={VendorsScreen} />
+  </Stack.Navigator>
+);
+
+const NeedsVendors = () => (
+  <Tab.Navigator barStyle={{ backgroundColor: 'indigo' }}>
+    <Tab.Screen
+      name="Needs"
+      component={NeedsScreenStack}
+      options={{
+        tabBarIcon: ({ color }) => {
+          return <Ionicons name="ios-shirt" size={26} color={color} />;
+        },
+      }}
+    />
+    <Tab.Screen
+      name="Vendors"
+      component={VendorsScreenStack}
+      options={{
+        tabBarIcon: ({ color }) => {
+          return <Ionicons name="ios-share" size={26} color={color} />;
+        },
+      }}
+    />
+  </Tab.Navigator>
+);
+
+const VolunteerNavigator = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName="Volunteer"
+      screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: 'blue' },
+      }}
+    >
+      <Stack.Screen name="Volunteer" component={JoinScreen} />
+      <Stack.Screen name="List Volunteer" component={VolunteerList} />
+      <Stack.Screen name="Find Volunteer" component={FindVolunteers} />
+    </Stack.Navigator>
+  );
+};
+
+const BookingStack = () => (
+  <Stack.Navigator
+    initialRouteName="Crowd Prediction"
+    screenOptions={{
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#2b9348' },
+    }}
+  >
+    <Stack.Screen name="Crowd Prediction" component={BookingPage} />
+    <Stack.Screen name="Route Details" component={TrafficMap} />
+    <Stack.Screen name="Possible Routes" component={PossibleRoutes} />
+    <Stack.Screen name="Maps" component={Location} />
+  </Stack.Navigator>
+);
+
 const DrawerNavigator = () => (
   <Drawer.Navigator
     drawerStyle={{ backgroundColor: 'white' }}
@@ -200,8 +314,12 @@ const DrawerNavigator = () => (
   >
     <Drawer.Screen name="Home" component={TabNavigator} />
     <Drawer.Screen name="Scan QRcode" component={QRcodeStack} />
+    <Drawer.Screen name="Medicals" component={MedicalNavigator} />
+    <Drawer.Screen name="Needs and Vendors" component={NeedsVendors} />
+    <Drawer.Screen name="Volunteer" component={VolunteerNavigator} />
     <Drawer.Screen name="Donate" component={DonateStack} />
     <Drawer.Screen name="Track Deliveries" component={TrackDelStack} />
+    <Drawer.Screen name="Predict Crowd" component={BookingStack} />
     <Drawer.Screen name="Settings" component={SettingsStack} />
   </Drawer.Navigator>
 );

@@ -15,20 +15,23 @@ import { LINK } from '../../assets/config';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
+import { ActivityIndicator } from 'react-native-paper';
 
 const ProductDetailsScreen = (props) => {
-  const [productName, setProductName] = useState('');
-  const [weight, setWeight] = useState('');
-  const [pvalue, setPvalue] = useState('');
-  const [name, setName] = useState();
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
+  const [productName, setProductName] = useState('Digi Pen');
+  const [weight, setWeight] = useState('20');
+  const [pvalue, setPvalue] = useState('1200');
+  const [name, setName] = useState('Aniket');
+  const [email, setEmail] = useState('some@gmail.com');
+  const [mobile, setMobile] = useState('7886767564');
   const [image, setImage] = useState();
+  const [loading, setLoading] = useState(false);
   const getPermission = async () => {
     await Permissions.askAsync(Permissions.CAMERA);
   };
   const token = useSelector((state) => state.auth.token);
   const submitHandler = useCallback(async () => {
+    setLoading(true);
     try {
       console.log(token, 'token');
       const formData = new FormData();
@@ -49,8 +52,10 @@ const ProductDetailsScreen = (props) => {
         },
       });
       console.log(res);
+      setLoading(false);
       props.navigation.navigate('Success', { id: res.data.data._id });
     } catch (er) {
+      setLoading(false);
       Alert.alert('Error occured!', er.response.data.message, ['Okay']);
     }
   });
@@ -166,7 +171,11 @@ const ProductDetailsScreen = (props) => {
         />
 
         <View style={{ marginVertical: 10, width: '40%' }}>
-          <Button title="Submit" color="#5e548e" onPress={submitHandler} />
+          {loading ? (
+            <ActivityIndicator color="#5e548e" />
+          ) : (
+            <Button title="Submit" color="#5e548e" onPress={submitHandler} />
+          )}
         </View>
       </LinearGradient>
     </ScrollView>

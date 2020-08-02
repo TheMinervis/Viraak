@@ -55,7 +55,8 @@ const SettingsPage = ({ navigation }) => {
   const [notify, setNotify] = useState(false);
   const [vibrate, setVibrate] = useState(false);
   const interaction = useSelector((state) => state.interaction.devices);
-  console.log(interaction, 'interaction');
+  const locations = useSelector((state) => state.locations.locations);
+
   return (
     <View style={{ flex: 1, alignItems: 'center' }}>
       <View style={{ width: '100%', height: 290 }}>
@@ -67,6 +68,35 @@ const SettingsPage = ({ navigation }) => {
           }}
         />
       </View>
+      {locations.map((el) => {
+        return (
+          <View
+            key={Date.now().toString()}
+            style={{
+              borderColor: 'black',
+              borderWidth: 1,
+              padding: 5,
+              width: '80%',
+              alignItems: 'center',
+              marginVertical: 10,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 15,
+              }}
+            >
+              {el}
+            </Text>
+            <Text style={{ color: 'black', fontSize: 15 }}>
+              {new Date().toISOString().substring(0, 10)}
+            </Text>
+          </View>
+        );
+      })}
       <TextInput
         style={{
           width: '80%',
