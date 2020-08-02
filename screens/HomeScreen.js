@@ -69,10 +69,36 @@ const Cards = (props) => {
   );
 };
 
+class CovidData {
+  constructor() {}
+  async setData() {
+    try {
+      let data = await axios.get('https://api.covid19india.org/v3/data.json');
+      this.data = data.data;
+      this.stateCodes = Object.keys(data.data);
+      // console.log(data);
+      this.stateCodes = this.stateCodes.filter((el) => el != 'TT');
+    } catch (er) {
+      console.log(er, 'er');
+    }
+  }
+  getStateData(stateCode) {
+    console.log(this.data[stateCode]);
+    return this.data[stateCode];
+  }
+  getTotal() {
+    // console.log(this.data, 'data');
+    return this.data['TT']['total'];
+  }
+}
+
+const obj = new CovidData();
+
 const HomeScreen = (props) => {
   const [show, setShow] = useState(false);
 
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const defineTask = () =>
     TaskManager.defineTask('background-task-location', ({ data, err }) => {
@@ -143,6 +169,12 @@ const HomeScreen = (props) => {
     }
   };
   useEffect(() => {
+    const set = async () => {
+      setLoading(true);
+      await obj.setData();
+      setLoading(false);
+    };
+    set();
     fetchLocation();
     defineTask();
     Location.startLocationUpdatesAsync('background-task-location', {
@@ -151,7 +183,7 @@ const HomeScreen = (props) => {
       distanceInterval: 1,
     });
 
-    fetchDetails();
+    // fetchDetails();
   }, []);
 
   useLayoutEffect(() => {
@@ -210,34 +242,53 @@ const HomeScreen = (props) => {
     );
   }
 
+  let stat = <ActivityIndicator color="white" size="large" />;
+  if (!loading) {
+    const total = obj.getTotal();
+    stat = (
+      <View style={{ width: '100%', padding: 5 }}>
+        <Text
+          style={{
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: 18,
+            marginVertical: 5,
+            marginHorizontal: 12,
+          }}
+        >
+          Corona Status
+        </Text>
+        <View style={styles.info}>
+          <Cards
+            title="Total Cases"
+            number={total['confirmed'] ? total['confirmed'] : 0}
+          />
+          <Cards
+            title="Active Cases"
+            number={
+              (total['confirmed'] ? total['confirmed'] : 0) -
+              (total['recovered'] ? total['recovered'] : 0) +
+              (total['deceased'] ? total['deceased'] : 0)
+            }
+          />
+        </View>
+        <View style={styles.info}>
+          <Cards
+            title="Cured/Discharged"
+            number={total['recovered'] ? total['recovered'] : 0}
+          />
+          <Cards
+            title="Deaths"
+            number={total['deceased'] ? total['deceased'] : 0}
+          />
+        </View>
+        <Button title="know more" color="red" />
+      </View>
+    );
+  }
   return (
     <ScrollView contentContainerStyle={styles.screen}>
-      {!show ? (
-        <View style={{ width: '100%', padding: 5 }}>
-          <Text
-            style={{
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: 18,
-              marginVertical: 5,
-              marginHorizontal: 12,
-            }}
-          >
-            Corona Status
-          </Text>
-          <View style={styles.info}>
-            <Cards title="Total Cases" number="46,621" />
-            <Cards title="Active Cases" number="32,096" />
-          </View>
-          <View style={styles.info}>
-            <Cards title="Cured/Discharged" number="12,948" />
-            <Cards title="Deaths" number="1,573" />
-          </View>
-          <Button title="know more" color="red" />
-        </View>
-      ) : (
-        el
-      )}
+      {!show ? stat : el}
       <Filter
         toggleSwitch={() => {
           if (data) {
