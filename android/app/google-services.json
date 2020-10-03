@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "783346339308",
+    "firebase_url": "https://smarttransport-281904.firebaseio.com",
+    "project_id": "smarttransport-281904",
+    "storage_bucket": "smarttransport-281904.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783346339308:android:768fd5aec9e523483344c9",
+        "android_client_info": {
+          "package_name": "com.smarttransportation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783346339308-85sonk0u6fvichboudktdedebfi84eot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smarttransportation",
+            "certificate_hash": "2b2c574f7ddc63a779fba55658f41687013cf3d4"
+          }
+        },
+        {
+          "client_id": "783346339308-k3daq805ntuqlav62d9avv90os6md0nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALcQ4lOwy2DZFw7aVnV6rbb2l7LAwyq50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783346339308-k3daq805ntuqlav62d9avv90os6md0nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
