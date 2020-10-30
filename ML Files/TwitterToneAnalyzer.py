@@ -2,7 +2,7 @@ import json
 from ibm_watson import ToneAnalyzerV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
-authenticator = IAMAuthenticator('QKtodOb0vauIw_xQaFiVb_RUbGP9JMCzriwFqToIUL5Y')
+authenticator = IAMAuthenticator(authcode)
 tone_analyzer = ToneAnalyzerV3(
     version='2017-09-21',
     authenticator=authenticator
@@ -14,10 +14,7 @@ import tweepy
 
 #Add your credentials here
 twitter_keys = {
-        'consumer_key':        'NPOZDKAbob1tBMsDUFQ07gRAr',
-        'consumer_secret':     'p0sztMBbhjzUS9ygnZk9ij5yT0lIFeOyxYZKoMBTDhL2M6Vpmy',
-        'access_token_key':    '1328561335-ACXCyUvKLz8xKhvBZVy6iyy5H2OS7zjkM2Vtciz',
-        'access_token_secret': '2O7CvtFKit2LFrb4h0NhqBf0YKppuWyWmDCukl1yxlDIo'
+        authkeys
     }
 
 #Setup access to API
